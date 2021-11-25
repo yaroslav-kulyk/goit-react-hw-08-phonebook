@@ -2,7 +2,7 @@ import ContactForm from '../components/ContactForm/ContactForm';
 import Filter from '../components/Filter/Filter';
 import ContactList from '../components/ContactList/ContactList';
 
-export default function Contacts() {
+export default function ContactsPage() {
   return (
     <>
       <h1>Phonebook</h1>
