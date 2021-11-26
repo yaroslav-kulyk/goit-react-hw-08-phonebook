@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useLoginMutation } from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../redux/auth';
 
 const styles = {
   form: {
@@ -15,7 +17,8 @@ const styles = {
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
+  // const [login] = useLoginMutation();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -30,8 +33,8 @@ export default function LoginPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // dispatch(authOperations.logIn({ email, password }));
-    login({ email, password });
+    dispatch(authOperations.logIn({ email, password }));
+    // login({ email, password });
     setEmail('');
     setPassword('');
   };

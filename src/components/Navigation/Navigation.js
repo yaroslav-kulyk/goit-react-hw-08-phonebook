@@ -8,13 +8,13 @@ export default function Navigation() {
         Home
       </NavLink>
 
-      <NavLink to="/login" className="link">
+      {/* <NavLink to="/login" className="link">
         Login
       </NavLink>
 
       <NavLink to="/register" className="link">
         Register
-      </NavLink>
+      </NavLink> */}
 
       <NavLink to="/contacts" className="link">
         Contacts

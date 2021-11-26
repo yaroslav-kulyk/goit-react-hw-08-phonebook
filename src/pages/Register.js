@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { useRegisterMutation } from '../redux/authSlice';
+// import { useRegisterMutation } from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../redux/auth';
 
 const styles = {
   form: {
@@ -16,7 +18,8 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [register] = useRegisterMutation();
+  // const [register] = useRegisterMutation();
+  const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -33,8 +36,8 @@ export default function RegisterPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // dispatch(authOperations.register({ name, email, password }));
-    register({ name, email, password });
+    dispatch(authOperations.register({ name, email, password }));
+    // register({ name, email, password });
     reset();
   };
 
