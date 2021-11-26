@@ -24,7 +24,8 @@ const ContactList = ({ filter }) => {
 
   return (
     <>
-      {/* {contacts && (
+      filtruiii!!
+      {contacts && (
         <ul className={s.contactList}>
           {contacts
             // .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
@@ -36,7 +37,7 @@ const ContactList = ({ filter }) => {
               );
             })}
         </ul>
-      )} */}
+      )}
     </>
   );
 };
