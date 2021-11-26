@@ -1,13 +1,18 @@
 import { useState } from 'react';
-import { useFetchContactsQuery } from '../../redux/contactsSlice';
-import { useAddContactMutation } from '../../redux/contactsSlice';
+// import { useFetchContactsQuery } from '../../redux/contactsSlice';
+// import { useAddContactMutation } from '../../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
+// import { phonebookOperations } from '../../redux/phonebook/phonebook-operations';
+import phonebookOperations from '../../redux/phonebook/phonebook-operations';
+
 import s from './ContactForm.module.css';
 
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [addContact] = useAddContactMutation();
-  const { data } = useFetchContactsQuery();
+  // const [addContact] = useAddContactMutation();
+  // const { data } = useFetchContactsQuery();
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -29,15 +34,16 @@ function ContactForm() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (
-      data.filter(contact =>
-        contact.name.toLowerCase().includes(name.toLowerCase()),
-      ).length > 0
-    ) {
-      return alert(`${name} already in contacts`);
-    }
+    // if (
+    //   data.filter(contact =>
+    //     contact.name.toLowerCase().includes(name.toLowerCase()),
+    //   ).length > 0
+    // ) {
+    //   return alert(`${name} already in contacts`);
+    // }
 
-    addContact({ name, number });
+    // addContact({ name, number });
+    dispatch(phonebookOperations.addContact({ name, number }));
 
     reset();
   };

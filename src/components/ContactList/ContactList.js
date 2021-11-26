@@ -4,13 +4,21 @@ import ContactListItem from './ContactListItem';
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
+import { useDispatch } from 'react-redux';
+import phonebookOperations from '../../redux/phonebook/phonebook-operations';
+
 const ContactList = ({ filter }) => {
-  const { data } = useFetchContactsQuery();
-  const normalizedFilter = filter.toLowerCase();
+  // const { data } = useFetchContactsQuery();
+  // const normalizedFilter = filter.toLowerCase();
+
+  const dispatch = useDispatch();
+  const data = dispatch(phonebookOperations.fetchContacts());
+  console.log(data);
 
   return (
     <>
-      {data && (
+      contacts
+      {/* {data && (
         <ul className={s.contactList}>
           {data
             .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
@@ -22,17 +30,18 @@ const ContactList = ({ filter }) => {
               );
             })}
         </ul>
-      )}
+      )} */}
     </>
   );
 };
 
-const mapStateToProps = state => ({
-  filter: state.contacts.filter,
-});
+// const mapStateToProps = state => ({
+//   filter: state.contacts.filter,
+// });
 
-ContactList.propTypes = {
-  filter: PropTypes.string,
-};
+// ContactList.propTypes = {
+//   filter: PropTypes.string,
+// };
 
-export default connect(mapStateToProps)(ContactList);
+// export default connect(mapStateToProps)(ContactList);
+export default ContactList;
