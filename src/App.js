@@ -1,4 +1,9 @@
 import { Routes, Route, Redirect } from 'react-router';
+
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { authOperations } from './redux/auth';
+
 import Container from './components/Container/Container';
 import AppBar from './components/AppBar/AppBar';
 import HomePage from './pages/Home';
@@ -11,6 +16,13 @@ import ContactList from './components/ContactList/ContactList';
 import s from './App.module.css';
 
 export default function App() {
+  const dispatch = useDispatch();
+  // const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <Container>
       <AppBar />
