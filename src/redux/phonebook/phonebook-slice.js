@@ -12,6 +12,9 @@ const phonebookSlice = createSlice({
     [phonebookOperations.addContact.fulfilled](state, action) {
       state.contacts = [...state.contacts, action.payload.contacts];
     },
+    [phonebookOperations.fetchContacts.fulfilled](state, action) {
+      state.contacts = action.payload;
+    },
     // [phonebookOperations.logIn.fulfilled](state, action) {
     //   state.user = action.payload.user;
     //   state.token = action.payload.token;

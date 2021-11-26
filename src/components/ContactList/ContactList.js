@@ -3,25 +3,31 @@ import { connect } from 'react-redux';
 import ContactListItem from './ContactListItem';
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
+import { useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import phonebookOperations from '../../redux/phonebook/phonebook-operations';
+import getContacts from '../../redux/phonebook/phonebook-selectors';
 
 const ContactList = ({ filter }) => {
   // const { data } = useFetchContactsQuery();
   // const normalizedFilter = filter.toLowerCase();
 
   const dispatch = useDispatch();
-  const data = dispatch(phonebookOperations.fetchContacts());
-  console.log(data);
+
+  const contacts = useSelector(getContacts);
+  console.log(contacts);
+
+  useEffect(() => {
+    dispatch(phonebookOperations.fetchContacts());
+  }, [dispatch]);
 
   return (
     <>
-      contacts
-      {/* {data && (
+      {/* {contacts && (
         <ul className={s.contactList}>
-          {data
-            .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
+          {contacts
+            // .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
             .map(({ id, name, phone }) => {
               return (
                 <li key={id}>
