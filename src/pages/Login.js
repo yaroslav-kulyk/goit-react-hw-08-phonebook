@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { useLoginMutation } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
@@ -18,7 +17,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  // const [login] = useLoginMutation();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -33,19 +31,19 @@ export default function LoginPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
+
     dispatch(authOperations.logIn({ email, password }));
-    // login({ email, password });
     setEmail('');
     setPassword('');
   };
 
   return (
     <div>
-      <h1>Страница логина</h1>
+      <h1>Login</h1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
-          Почта
+          Email
           <input
             type="email"
             name="email"
@@ -55,7 +53,7 @@ export default function LoginPage() {
         </label>
 
         <label style={styles.label}>
-          Пароль
+          Password
           <input
             type="password"
             name="password"
@@ -64,7 +62,7 @@ export default function LoginPage() {
           />
         </label>
 
-        <button type="submit">Войти</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

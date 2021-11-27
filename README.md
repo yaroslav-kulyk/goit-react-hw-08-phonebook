@@ -1,1 +1,1 @@
-# Homework 7 - Phonebook (Redux, RTK Query)
+# Homework 8 - Phonebook

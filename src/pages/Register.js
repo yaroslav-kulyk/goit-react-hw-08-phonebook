@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { useRegisterMutation } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
@@ -18,7 +17,6 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [register] = useRegisterMutation();
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -37,7 +35,6 @@ export default function RegisterPage() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.register({ name, email, password }));
-    // register({ name, email, password });
     reset();
   };
 
@@ -49,16 +46,16 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <h1>Страница регистрации</h1>
+      <h1>Register</h1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
-          Имя
+          Name
           <input type="text" name="name" value={name} onChange={handleChange} />
         </label>
 
         <label style={styles.label}>
-          Почта
+          Email
           <input
             type="email"
             name="email"
@@ -68,7 +65,7 @@ export default function RegisterPage() {
         </label>
 
         <label style={styles.label}>
-          Пароль
+          Password
           <input
             type="password"
             name="password"
@@ -77,7 +74,7 @@ export default function RegisterPage() {
           />
         </label>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

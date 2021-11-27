@@ -1,8 +1,7 @@
-import { Routes, Route, Redirect } from 'react-router';
-
+import { Routes, Route, Navigate } from 'react-router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authOperations } from './redux/auth';
+import { authOperations, authSelectors } from './redux/auth';
 
 import Container from './components/Container/Container';
 import AppBar from './components/AppBar/AppBar';
@@ -10,14 +9,10 @@ import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import ContactsPage from './pages/Contacts';
-import ContactForm from './components/ContactForm/ContactForm';
-import Filter from './components/Filter/Filter';
-import ContactList from './components/ContactList/ContactList';
-import s from './App.module.css';
 
 export default function App() {
   const dispatch = useDispatch();
-  // const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
@@ -31,27 +26,26 @@ export default function App() {
           <Route element={<HomePage />} />
         </Route>
 
-        <Route path="/login" element={<LoginPage />}>
-          <Route element={<LoginPage />} />
-        </Route>
+        <Route
+          path="/login"
+          element={
+            isLoggedIn ? <Navigate to="/contacts" replace /> : <LoginPage />
+          }
+        />
 
         <Route path="/register" element={<RegisterPage />}>
           <Route element={<RegisterPage />} />
         </Route>
 
-        <Route path="/contacts" element={<ContactsPage />}>
-          <Route element={<ContactsPage />} />
-        </Route>
+        <Route
+          path="/contacts"
+          element={
+            isLoggedIn ? <ContactsPage /> : <Navigate to="/login" replace />
+          }
+        />
+
+        <Route path="*" element={<h2>Not Found Page</h2>} />
       </Routes>
-
-      {/* <div className={s.container}>
-        <h1>Phonebook</h1>
-        <ContactForm />
-
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </div> */}
     </Container>
   );
 }
