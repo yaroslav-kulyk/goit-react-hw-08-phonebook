@@ -6,6 +6,8 @@ const filter = createReducer('', {
   [actions.changeFilter]: (_, { payload }) => payload,
 });
 
-export default combineReducers({
-  filter,
-});
+// export default combineReducers({
+//   filter,
+// });
+
+export default filter;

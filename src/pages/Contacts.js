@@ -9,7 +9,7 @@ export default function ContactsPage() {
       <ContactForm />
 
       <h2>Contacts</h2>
-      {/* <Filter /> */}
+      <Filter />
       <ContactList />
     </>
   );

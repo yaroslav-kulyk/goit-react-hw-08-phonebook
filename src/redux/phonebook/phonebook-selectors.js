@@ -1,10 +1,14 @@
-// import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
 
 // // const getLoading = state => state.todos.loading;
 
 // // const getFilter = state => state.todos.filter;
 
-// const getAllTodos = state => state.phonebook.contacts;
+// const getAllContacts = state => state.phonebook.contacts;
+
+const getContacts = state => state.phonebook.contacts;
+const getIsLoading = state => state.phonebook.isLoading;
+const getFilter = state => state.filter;
 
 // // const getTotalTodoCount = state => {
 // //   const todos = getAllTodos(state);
@@ -15,23 +19,14 @@
 // //   return todos.reduce((total, todo) => (todo.completed ? total + 1 : total), 0);
 // // });
 
-// const getVisibleTodos = createSelector(
-//   [getAllTodos, getFilter],
-//   (todos, filter) => {
+// const getVisibleContacts = createSelector(
+//   [getContacts, getFilter],
+//   (contacts, filter) => {
 //     const normalizedFilter = filter.toLowerCase();
-//     return todos.filter(({ description }) =>
-//       description.toLowerCase().includes(normalizedFilter),
+//     return contacts.filter(({ name }) =>
+//       name.toLowerCase().includes(normalizedFilter),
 //     );
 //   },
-// );
-
-// [getAllTodos, getFilter],
-// (todos, filter) => {
-//   const normalizedFilter = filter.toLowerCase();
-//   return todos.filter(({ description }) =>
-//     description.toLowerCase().includes(normalizedFilter),
-//   );
-// },
 // );
 
 // const todosSelectors = {
@@ -43,12 +38,11 @@
 // };
 // export default todosSelectors;
 
-const getContacts = state => state.phonebook.contacts;
-const getIsLoading = state => state.phonebook.isLoading;
-
 const phonebookSelectors = {
   getContacts,
   getIsLoading,
+  getFilter,
+  //   getVisibleContacts,
 };
 
 // const getUsername = state => state.auth.user.name;

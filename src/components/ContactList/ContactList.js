@@ -12,11 +12,12 @@ import phonebookSelectors from '../../redux/phonebook/phonebook-selectors';
 
 const ContactList = () => {
   // const { data } = useFetchContactsQuery();
-  // const normalizedFilter = filter.toLowerCase();
 
   const dispatch = useDispatch();
   const contacts = useSelector(phonebookSelectors.getContacts);
   const isLoading = useSelector(phonebookSelectors.getIsLoading);
+  const filter = useSelector(phonebookSelectors.getFilter);
+  // const normalizedFilter = filter.toLowerCase();
   // console.log(contacts);
 
   const deleteContact = id => {
@@ -44,7 +45,7 @@ const ContactList = () => {
         contacts && (
           <ul className={s.contactList}>
             {contacts
-              // .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
+              .filter(({ name }) => name.toLowerCase().includes(filter))
               .map(({ id, name, number }) => {
                 return (
                   <li key={id}>

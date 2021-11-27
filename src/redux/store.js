@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import filterReducer from './phonebook/phonebook-reducer';
+import filter from './phonebook/phonebook-reducer';
 import {
   persistStore,
   persistReducer,
@@ -34,6 +34,7 @@ const authPersistConfig = {
 const store = configureStore({
   reducer: {
     // auth: authReducer,
+    filter,
     auth: persistReducer(authPersistConfig, authReducer),
     phonebook: phonebookReducer,
     [contactsApi.reducerPath]: contactsApi.reducer,

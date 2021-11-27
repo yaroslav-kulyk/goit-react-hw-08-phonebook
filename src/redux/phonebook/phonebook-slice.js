@@ -3,13 +3,20 @@ import phonebookOperations from './phonebook-operations';
 
 const initialState = {
   contacts: [],
+  // filter: '',
   isLoading: false,
 };
 
 const phonebookSlice = createSlice({
   name: 'phonebook',
   initialState,
+  // reducers: {
+  //   changeFilter: (state, { payload }) => (state.filter = payload),
+  // },
   extraReducers: {
+    [phonebookOperations.fetchContacts.fulfilled](state, action) {
+      state.contacts = action.payload;
+    },
     [phonebookOperations.addContact.pending](state, action) {
       state.isLoading = true;
     },
@@ -17,9 +24,7 @@ const phonebookSlice = createSlice({
       state.contacts = [...state.contacts, action.payload];
       state.isLoading = false;
     },
-    [phonebookOperations.fetchContacts.fulfilled](state, action) {
-      state.contacts = action.payload;
-    },
+
     // [phonebookOperations.logIn.fulfilled](state, action) {
     //   state.user = action.payload.user;
     //   state.token = action.payload.token;
@@ -37,4 +42,5 @@ const phonebookSlice = createSlice({
   },
 });
 
+// export const { changeFilter } = phonebookSlice.actions;
 export default phonebookSlice.reducer;
