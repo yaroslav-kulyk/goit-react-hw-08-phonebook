@@ -33,9 +33,12 @@ export default function App() {
           }
         />
 
-        <Route path="/register" element={<RegisterPage />}>
-          <Route element={<RegisterPage />} />
-        </Route>
+        <Route
+          path="/register"
+          element={
+            isLoggedIn ? <Navigate to="/contacts" replace /> : <RegisterPage />
+          }
+        />
 
         <Route
           path="/contacts"
