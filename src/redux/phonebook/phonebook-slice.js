@@ -3,14 +3,19 @@ import phonebookOperations from './phonebook-operations';
 
 const initialState = {
   contacts: [],
+  isLoading: false,
 };
 
 const phonebookSlice = createSlice({
   name: 'phonebook',
   initialState,
   extraReducers: {
+    [phonebookOperations.addContact.pending](state, action) {
+      state.isLoading = true;
+    },
     [phonebookOperations.addContact.fulfilled](state, action) {
-      state.contacts = [...state.contacts, action.payload.contacts];
+      state.contacts = [...state.contacts, action.payload];
+      state.isLoading = false;
     },
     [phonebookOperations.fetchContacts.fulfilled](state, action) {
       state.contacts = action.payload;

@@ -7,37 +7,75 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import phonebookOperations from '../../redux/phonebook/phonebook-operations';
-import getContacts from '../../redux/phonebook/phonebook-selectors';
+// import getContacts from '../../redux/phonebook/phonebook-selectors';
+import phonebookSelectors from '../../redux/phonebook/phonebook-selectors';
 
-const ContactList = ({ filter }) => {
+const ContactList = () => {
   // const { data } = useFetchContactsQuery();
   // const normalizedFilter = filter.toLowerCase();
 
   const dispatch = useDispatch();
+  const contacts = useSelector(phonebookSelectors.getContacts);
+  const isLoading = useSelector(phonebookSelectors.getIsLoading);
+  // console.log(contacts);
 
-  const contacts = useSelector(getContacts);
-  console.log(contacts);
+  const deleteContact = id => {
+    dispatch(phonebookOperations.deleteContact(id));
+    // dispatch(phonebookOperations.fetchContacts());
+  };
 
-  useEffect(() => {
-    dispatch(phonebookOperations.fetchContacts());
-  }, [dispatch]);
+  const loadContacts = () => dispatch(phonebookOperations.fetchContacts());
+
+  // const deleteContact = dispatch(phonebookOperations.deleteContact(id));
+
+  // useEffect(() => {
+  //   dispatch(phonebookOperations.fetchContacts());
+  // }, []);
 
   return (
     <>
       filtruiii!!
-      {contacts && (
+      <button type="button" onClick={loadContacts}>
+        Load contacts
+      </button>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        contacts && (
+          <ul className={s.contactList}>
+            {contacts
+              // .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
+              .map(({ id, name, number }) => {
+                return (
+                  <li key={id}>
+                    <ContactListItem
+                      name={name}
+                      phone={number}
+                      onDelete={() => deleteContact(id)}
+                    />
+                  </li>
+                );
+              })}
+          </ul>
+        )
+      )}
+      {/* {contacts && (
         <ul className={s.contactList}>
           {contacts
             // .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
-            .map(({ id, name, phone }) => {
+            .map(({ id, name, number }) => {
               return (
                 <li key={id}>
-                  <ContactListItem id={id} name={name} phone={phone} />
+                  <ContactListItem
+                    name={name}
+                    phone={number}
+                    onDelete={() => deleteContact(id)}
+                  />
                 </li>
               );
             })}
         </ul>
-      )}
+      )} */}
     </>
   );
 };

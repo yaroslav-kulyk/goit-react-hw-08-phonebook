@@ -17,7 +17,7 @@ const fetchContacts = createAsyncThunk('contacts/fetchContacts', async () => {
 const addContact = createAsyncThunk('contacts/addContact', async newContact => {
   try {
     const { data } = await axios.post('/contacts', newContact);
-
+    // fetchContacts();
     return data;
     //   token.unset();
   } catch (error) {
@@ -25,9 +25,24 @@ const addContact = createAsyncThunk('contacts/addContact', async newContact => {
   }
 });
 
+const deleteContact = createAsyncThunk(
+  'contacts/deleteContact',
+  async contactId => {
+    try {
+      const { data } = await axios.delete(`/contacts/${contactId}`);
+
+      return data;
+      //   token.unset();
+    } catch (error) {
+      // TODO: Добавить обработку ошибки error.message
+    }
+  },
+);
+
 const phonebookOperations = {
-  addContact,
   fetchContacts,
+  addContact,
+  deleteContact,
 };
 
 export default phonebookOperations;

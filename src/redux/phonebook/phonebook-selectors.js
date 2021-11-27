@@ -44,6 +44,12 @@
 // export default todosSelectors;
 
 const getContacts = state => state.phonebook.contacts;
+const getIsLoading = state => state.phonebook.isLoading;
+
+const phonebookSelectors = {
+  getContacts,
+  getIsLoading,
+};
 
 // const getUsername = state => state.auth.user.name;
 
@@ -52,4 +58,4 @@ const getContacts = state => state.phonebook.contacts;
 //   getUsername,
 // };
 // export default phonebookSelectors;
-export default getContacts;
+export default phonebookSelectors;

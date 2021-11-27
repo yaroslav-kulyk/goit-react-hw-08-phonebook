@@ -2,7 +2,6 @@ import { useState } from 'react';
 // import { useFetchContactsQuery } from '../../redux/contactsSlice';
 // import { useAddContactMutation } from '../../redux/contactsSlice';
 import { useDispatch } from 'react-redux';
-// import { phonebookOperations } from '../../redux/phonebook/phonebook-operations';
 import phonebookOperations from '../../redux/phonebook/phonebook-operations';
 
 import s from './ContactForm.module.css';
@@ -31,7 +30,7 @@ function ContactForm() {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     // if (
